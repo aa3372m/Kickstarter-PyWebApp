@@ -32,13 +32,26 @@ ENV/
 *.swp
 *.swo
 
+# Flask
+instance/
+.webassets-cache
+
+# Logs
+logs/
+*.log
+
 # Database
 *.db
 *.sqlite3
 
-# Logs
-*.log
-logs/
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # Media and Static files
 app/static/uploads/
