@@ -1,0 +1,24 @@
+{
+  "app_name": "Kickstarter PyWebApp",
+  "client_name": "Demo Client",
+  "theme": {
+    "default": "light",
+    "available": ["light", "dark", "custom"]
+  },
+  "database": {
+    "development": "sqlite:////Users/macbook/Public/dev/prj_kickstarter_pywebapp/instance/app.db",
+    "production": "postgresql://user:pass@localhost/dbname"
+  },
+  "security": {
+    "session_lifetime": 86400,
+    "password_min_length": 8,
+    "csrf_enabled": true,
+    "csrf_time_limit": 3600,
+    "secret_key": "your-super-secret-key-change-in-production"
+  },
+  "mail_server": {
+    "smtp_host": "localhost",
+    "smtp_port": 25,
+    "use_tls": false
+  }
+} 

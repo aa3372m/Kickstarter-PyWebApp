@@ -1,0 +1,78 @@
+category,code,description,is_active,icon,tags,created_on,created_by
+HONORIFIC,MR,Mr,TRUE,account-tie,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+HONORIFIC,MRS,Mrs,TRUE,account-tie,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+HONORIFIC,MS,Ms,TRUE,account-tie,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+HONORIFIC,DR,Dr,TRUE,account-tie-medical,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+HONORIFIC,PROF,Prof,TRUE,account-tie-education,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+GENDER,M,Male,TRUE,gender-male,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+GENDER,F,Female,TRUE,gender-female,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+GENDER,O,Other,TRUE,gender-male-female,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+MARITAL,SGL,Single,TRUE,account,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+MARITAL,MRD,Married,TRUE,account-multiple,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+MARITAL,WDW,Widow,TRUE,account-alert,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+MARITAL,DIV,Divorced,TRUE,account-cancel,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+MARITAL,UNK,Unknown,TRUE,account-question,Personal,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,FTH,Father,TRUE,human-male,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,MTH,Mother,TRUE,human-female,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,BRO,Brother,TRUE,human-male-child,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,SIS,Sister,TRUE,human-female-child,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,SPS,Spouse,TRUE,account-heart,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,SON,Son,TRUE,human-male-child,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,DAU,Daughter,TRUE,human-female-child,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+RELATION,GRD,Guardian,TRUE,shield-account,Family,2025-01-04T17:47:19+03:00,admin@ins10.com
+GRADE,AP,A+,TRUE,alpha-a-box-plus,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+GRADE,A,A,TRUE,alpha-a-box,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+GRADE,BP,B+,TRUE,alpha-b-box-plus,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+GRADE,B,B,TRUE,alpha-b-box,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+GRADE,C,C,TRUE,alpha-c-box,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+GRADE,D,D,TRUE,alpha-d-box,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+GRADE,F,F,TRUE,alpha-f-box,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+RESULT,P,Pass,TRUE,check-circle,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+RESULT,F,Fail,TRUE,close-circle,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+RESULT,W,Withdraw,TRUE,minus-circle,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+EDUCATION,PHD,Doctor of Philosophy,TRUE,school-plus,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+EDUCATION,MSC,Master of Science,TRUE,school,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+EDUCATION,BSC,Bachelor of Science,TRUE,school,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+EDUCATION,DIP,Diploma,TRUE,certificate,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+EDUCATION,CERT,Certificate,TRUE,certificate-outline,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+MAJOR,CS,Computer Science,TRUE,laptop,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+MAJOR,ENG,Engineering,TRUE,engine,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+MAJOR,BUS,Business Administration,TRUE,briefcase,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+MAJOR,MED,Medicine,TRUE,medical-bag,Academic,2025-01-04T17:47:19+03:00,admin@ins10.com
+LANGUAGE,en,English,TRUE,translate,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+LANGUAGE,ar,Arabic,TRUE,translate,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+LANGUAGE,ur,Urdu,TRUE,translate,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+LANGUAGE,pa,Pashtu,TRUE,translate,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+LANGUAGE,hk,Hindko,TRUE,translate,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CURRENCY,USD,US Dollar,TRUE,currency-usd,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CURRENCY,PKR,Pakistani rupee,TRUE,currency-sign,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+COUNTRY,PK,Pakistan,TRUE,flag,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+STATE,KPK,Khyber Pakhtoonkhwa,TRUE,map-marker-radius,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+STATE,ICT,Islamabad,TRUE,map-marker-radius,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK001,Peshawar,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK002,Mardan,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK003,Abbottabad,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK004,Mansehra,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK005,Swabi,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK006,Nowshera,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK007,Charsadda,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK008,Dera Ismail Khan,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK009,Bannu,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK010,Kohat,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK011,Haripur,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK012,Swat (Mingora),TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK013,Malakand,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK014,Buner,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK015,Lakki Marwat,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK016,Tank,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK017,Torghar,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK018,Upper Dir,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK019,Lower Dir,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK020,Upper Chitral,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK021,Lower Chitral,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK022,Battagram,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK023,Khyber,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK024,Orakzai,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK025,Kurram,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK026,Mohmand,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com
+CITIES,KPK027,Bajaur,TRUE,city,Location,2025-01-04T17:47:19+03:00,admin@ins10.com

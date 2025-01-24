@@ -1,0 +1,35 @@
+I want your assistance in developing a starter-kit for comming up projects.
+Therefore, adapding best practices, use python 3.12 and flask to create a web app that is mobile responsive with modern UI/UX.
+1) config.json has all the core settings on the server regarding App Name, Clint Name, default theme, and other settings. 
+    a) Default theme should be light, but later user should be able to switch to dark mode, and pick other themes. 
+    b) there should be a directory of themes that contains files based on the theme names like light.css, dark.css, facebook.css, etc.
+    c) Maintaining the app for developers should be easy such that they can add more pages, screens, and other features easily.
+    d) The app must be deployable on clouds and on local servers. We may also be able to access it via ngrok.
+2) Login and Signup:
+    a) The app must use flask-login for authentication such that the user can login and logout. user don't have login if they are not logged in.
+    b) the login page should have option to reset password, and sign up.
+    c) Upon successful login, the user should be redirected to the home page.
+    c) User profile dialog should have option to change password, update profile picture, change theme, and delete account.
+    d) to create an admin user, there should be a script called admin_create.py that creates an admin user with username and password. to lock admin admin_lock.py and to delete admin_delete.py are used.
+3) Home page:
+    a) upon successful login, the user should be redirected to the home page. Previously logged in user should be redirected to the home page and don't have to login again until logged out.
+    b) all user preferences should be saved in the database such as theme, language in user preferences table and should be loaded from the database when the user logs in.
+    c) as per the theme selected, the home page should be styled while mobile responsive. for icons, use fontawesome.
+    d) the home page should have a header with a burger menu, App Name, Client Name, and the user's profile picture as icon with a dropdown menu having options to logout, and user profile dialog.
+    e) the home page should have a main content area that displays contents based on user selected menu.
+    e) the home page should have a sidebar with options that is displayed via burger menu cliking and can stick when pinned. upon unpinning it disappears.
+    f) the home page should have a footer with the current theme, and the current date and time.
+    g) the home page has placeholders for dashboard items like cards, charts, tables, etc. these placeholders should be editable by the developer.
+4) Admin page:
+    a) admin page is accessible only to admin users when they login and clicks on menu option Admin from the user profile dropdown menu.
+    b) admin page opens in the main area of the home page and has tile based menu options with icons and text. they are:
+        i) Users: to view all users, add, edit, and delete users. manager their roles and permissions.
+        ii) Master Data: to view all master data, add, edit, and delete master data. which is based on a table called master_data table that has category, code, description, is_active, icon, tags, created_on, created_by.
+        iii) configurations: to access the config.json file and edit the settings.
+5) People page: 
+    a) Listed as People in the sidebar, this page is to manage people if user is authorized to do so. Based on the user permission people can be viewed, added, edited, and deleted.
+    b) the toolbar of the page has a search box, and CRUD buttons as per the user permission. Its kebab menu also has Import, Export, and Print options.
+    c) The page has List View that displays the people in a table with columns as per table people that has columns such as person_id, fullame, tags, email, primary_phone, address_postal, city, state_province, zip_postal, country, is_active, created_on, created_by.
+    d) The page has Detail View that displays the person's details in a form with fields as per table people.
+    e) the page has a More View which is a blank but placeholder for future use that developer can use to add more views.
+

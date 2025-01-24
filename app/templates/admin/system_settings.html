@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-cogs me-2"></i>System Settings</h2>
+        <a href="{{ url_for('admin.admin_dashboard') }}" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+        </a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-wrench me-2"></i>Configuration Settings
+            </h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('admin.system_settings') }}" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2">Application Settings</h5>
+                        <div class="mb-3">
+                            {{ form.app_name.label(class="form-label") }}
+                            {{ form.app_name(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.client_name.label(class="form-label") }}
+                            {{ form.client_name(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.default_theme.label(class="form-label") }}
+                            {{ form.default_theme(class="form-select") }}
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5 class="border-bottom pb-2">Security Settings</h5>
+                        <div class="mb-3">
+                            {{ form.admin_email.label(class="form-label") }}
+                            {{ form.admin_email(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.session_lifetime.label(class="form-label") }}
+                            {{ form.session_lifetime(class="form-control") }}
+                            <div class="form-text">Duration in seconds before session expires</div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.password_min_length.label(class="form-label") }}
+                            {{ form.password_min_length(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h5 class="border-bottom pb-2">Mail Server Settings</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.smtp_host.label(class="form-label") }}
+                                    {{ form.smtp_host(class="form-control") }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.smtp_port.label(class="form-label") }}
+                                    {{ form.smtp_port(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.smtp_user.label(class="form-label") }}
+                                    {{ form.smtp_user(class="form-control") }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.smtp_password.label(class="form-label") }}
+                                    {{ form.smtp_password(class="form-control", type="password") }}
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        {{ form.smtp_use_tls(class="form-check-input") }}
+                                        {{ form.smtp_use_tls.label(class="form-check-label") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="border-bottom pb-2">Configuration Backup & Restore</h5>
+                        <div class="row align-items-end">
+                            <div class="col-md-4 mb-3">
+                                <form action="{{ url_for('admin.backup_config') }}" method="POST" class="d-inline">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    {{ form.backup_config(class="btn btn-info") }}
+                                </form>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <form action="{{ url_for('admin.restore_config') }}" method="POST" enctype="multipart/form-data" class="d-inline">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <div class="input-group">
+                                        {{ form.restore_config(class="form-control") }}
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="fas fa-upload me-2"></i>Restore
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form validation
+    const form = document.querySelector('form');
+    console.log('Form found:', form);
+    console.log('Form action:', form.action);
+    console.log('Form method:', form.method);
+
+    form.addEventListener('submit', function(event) {
+        console.log('Form submission triggered');
+        console.log('Form data:', new FormData(form));
+        
+        if (!form.checkValidity()) {
+            console.log('Form validation failed');
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            console.log('Form is valid, proceeding with submission');
+        }
+        form.classList.add('was-validated');
+    });
+
+    // Log form field values
+    const formFields = form.querySelectorAll('input, select');
+    formFields.forEach(field => {
+        console.log(`Field ${field.name}:`, field.value);
+        field.addEventListener('change', function() {
+            console.log(`Field ${field.name} changed to:`, field.value);
+        });
+    });
+
+    // File input validation
+    const restoreInput = document.querySelector('input[type="file"]');
+    console.log('Restore input found:', restoreInput);
+    restoreInput.addEventListener('change', function() {
+        const file = this.files[0];
+        console.log('Selected file:', file);
+        if (file) {
+            if (!file.name.toLowerCase().endsWith('.json')) {
+                console.log('Invalid file type selected');
+                alert('Please select a JSON file');
+                this.value = '';
+            } else {
+                console.log('Valid JSON file selected');
+            }
+        }
+    });
+});
+</script>
+{% endblock %} 

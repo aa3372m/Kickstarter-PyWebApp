@@ -1,0 +1,321 @@
+Project: Modern Flask Web Application Starter Kit
+
+Technology Stack:
+- Python 3.12
+- Flask Framework
+- SQLAlchemy for ORM
+- Flask-Login for authentication
+- SQLite for development, PostgreSQL for production
+- HTML5, CSS3, JavaScript (ES6+)
+- Bootstrap 5 for responsive design
+- Font Awesome 6 for icons
+- jQuery for DOM manipulation
+- Chart.js for data visualization
+
+1. Project Structure and Configuration:
+   a) Directory Structure:
+      ```
+      /app
+        /static
+          /css
+            /themes
+              light.css
+              dark.css
+              custom.css
+          /js
+          /images
+        /templates
+        /models
+        /views
+        /utils
+      /config
+        config.json
+        config.py
+      /scripts
+        admin_create.py
+        admin_lock.py
+        admin_delete.py
+      /tests
+      requirements.txt
+      README.md
+      .env.example
+      .gitignore
+      run.py
+      ```
+
+   b) Configuration Management:
+      - config.json structure:
+        ```json
+        {
+          "app_name": "Your App Name",
+          "client_name": "Your Client Name",
+          "theme": {
+            "default": "light",
+            "available": ["light", "dark", "custom"]
+          },
+          "database": {
+            "development": "sqlite:///dev.db",
+            "production": "postgresql://user:pass@localhost/dbname"
+          },
+          "security": {
+            "session_lifetime": 86400,
+            "password_min_length": 8
+          },
+          "mail_server": {
+            "smtp_host": "",
+            "smtp_port": 587,
+            "use_tls": true
+          }
+        }
+        ```
+
+2. Authentication System:
+   a) Database Schema:
+      - users table:
+        ```sql
+        CREATE TABLE users (
+            user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username VARCHAR(50) UNIQUE NOT NULL,
+            email VARCHAR(120) UNIQUE NOT NULL,
+            password_hash VARCHAR(256) NOT NULL,
+            full_name VARCHAR(100),
+            profile_picture VARCHAR(200),
+            is_active BOOLEAN DEFAULT true,
+            is_admin BOOLEAN DEFAULT false,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            last_login TIMESTAMP
+        );
+        ```
+      - user_preferences table:
+        ```sql
+        CREATE TABLE user_preferences (
+            pref_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER REFERENCES users(user_id),
+            theme VARCHAR(20) DEFAULT 'light',
+            language VARCHAR(10) DEFAULT 'en',
+            sidebar_pinned BOOLEAN DEFAULT false,
+            notifications_enabled BOOLEAN DEFAULT true,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP
+        );
+        ```
+
+   b) Authentication Features:
+      - JWT token-based authentication
+      - Password reset via email
+      - Remember me functionality
+      - Account lockout after failed attempts
+      - Password complexity requirements
+      - Session management and timeout
+      - OAuth2 integration readiness
+
+3. Home Page Components:
+   a) Header:
+      - Responsive navbar with burger menu
+      - App logo and name
+      - Client name display
+      - Search functionality
+      - Notifications bell icon
+      - User profile dropdown with:
+        * View Profile
+        * Settings
+        * Theme Selector
+        * Admin Panel (if admin)
+        * Logout
+
+   b) Sidebar:
+      - Collapsible/Expandable
+      - Pin/Unpin functionality
+      - Nested menu support
+      - Icon and text display
+      - Active menu highlighting
+      - Custom scrollbar
+      - Menu items:
+        * Dashboard
+        * People
+        * Reports
+        * Settings
+        * Help
+
+   c) Main Content Area:
+      - Breadcrumb navigation
+      - Dynamic content loading
+      - Loading indicators
+      - Error handling displays
+      - Responsive grid system
+      - Component placeholders:
+        * Stats cards
+        * Charts
+        * Data tables
+        * Forms
+        * Alerts
+
+   d) Footer:
+      - Current theme display
+      - DateTime with timezone
+      - Version information
+      - Quick links
+      - Copyright notice
+
+4. Admin Panel Features:
+   a) User Management:
+      - CRUD operations for users
+      - Role assignment
+      - Permission management
+      - Bulk operations
+      - User activity logs
+      - Account status control
+
+   b) Master Data Management:
+      - Database Schema:
+        ```sql
+        CREATE TABLE master_data (
+            data_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            category VARCHAR(50) NOT NULL,
+            code VARCHAR(50) NOT NULL,
+            description TEXT,
+            is_active BOOLEAN DEFAULT true,
+            icon VARCHAR(50),
+            tags TEXT,
+            sort_order INTEGER,
+            created_by INTEGER REFERENCES users(user_id),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP,
+            UNIQUE(category, code)
+        );
+        ```
+      - Category-wise organization
+      - Import/Export functionality
+      - Version control
+      - Audit trail
+
+   c) Configuration Editor:
+      - JSON editor interface
+      - Configuration validation
+      - Backup/Restore functionality
+      - Change history logging
+
+5. People Management Module:
+   a) Database Schema:
+      ```sql
+      CREATE TABLE people (
+          person_id INTEGER PRIMARY KEY AUTOINCREMENT,
+          fullname VARCHAR(100) NOT NULL,
+          email VARCHAR(120),
+          primary_phone VARCHAR(20),
+          secondary_phone VARCHAR(20),
+          address_line1 VARCHAR(100),
+          address_line2 VARCHAR(100),
+          city VARCHAR(50),
+          state_province VARCHAR(50),
+          zip_postal VARCHAR(20),
+          country VARCHAR(50),
+          tags TEXT,
+          notes TEXT,
+          is_active BOOLEAN DEFAULT true,
+          created_by INTEGER REFERENCES users(user_id),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updated_at TIMESTAMP
+      );
+      ```
+
+   b) View Components:
+      - List View:
+        * Sortable columns
+        * Filterable fields
+        * Pagination
+        * Bulk actions
+        * Custom column visibility
+        * Export options (CSV, Excel, PDF)
+
+      - Detail View:
+        * Tabbed interface
+        * Form validation
+        * File attachments
+        * Activity history
+        * Related records
+
+      - More View:
+        * Customizable widgets
+        * Plugin architecture
+        * Developer documentation
+
+6. Development Guidelines:
+   a) Code Standards:
+      - PEP 8 compliance
+      - Type hinting
+      - Docstring requirements
+      - Unit test coverage
+      - Code review process
+
+   b) Security Measures:
+      - CSRF protection
+      - XSS prevention
+      - SQL injection protection
+      - Input sanitization
+      - Rate limiting
+      - Security headers
+
+   c) Performance Optimization:
+      - Database indexing
+      - Caching strategy
+      - Asset minification
+      - Lazy loading
+      - Query optimization
+
+   d) Deployment:
+      - Docker support
+      - CI/CD pipeline
+      - Environment configuration
+      - Backup procedures
+      - Monitoring setup
+      - Logging system
+
+7. Documentation:
+   a) Setup Guide:
+      - Installation steps
+      - Configuration options
+      - Development setup
+      - Production deployment
+      - Troubleshooting
+
+   b) API Documentation:
+      - Endpoint descriptions
+      - Request/Response formats
+      - Authentication details
+      - Rate limits
+      - Error codes
+
+   c) User Guide:
+      - Feature walkthrough
+      - Common tasks
+      - Best practices
+      - FAQs 
+
+Key points:
+0) always generate console logs on server for each operations when verbose is set to true. the logs must be helpful for diagnosing issues.
+1) The app should be mobile responsive with a modern UI/UX.
+2) The app should be easy to maintain, allowing developers to add pages, screens, and features easily.
+3) The app should be modular and scalable, allowing for easy addition of new features and pages each has comments for developers to understand the code.
+4) The app should be deployable on both cloud and local servers, with access via ngrok.
+5) The readme.md file should contain the instructions to run the app and also explain the project structure and how to add new pages, screens, and features.
+6) include in the requirements.txt file the dependencies for the project including flask related, database related, pandas, excel file import export, pdf based reports, etc.
+7) maintain directories to keep staic images and media files that are required for the project. also maintain separate directory for user uploaded files and media.
+8) use sqlite as database, but later can be changed to other database like mysql, postgresql, etc.
+9) use api endpoints for all the operations that are required for the project.
+10) provide user friendly messages to the user for all the operations.
+10) offer proper eror handling and logging. don't crash the app if there is an error while show diagnositc messages to the user.
+
+Getting started:
+1) create a new directory for the project.
+2) create a new virtual environment for the named kickstarter101 as conda environment.
+3) install the dependencies for the project.
+4) create the project structure as per the requirements.
+5) create the readme.md file and the requirements.txt file.
+6) create the config.json file and the themes directory.
+7) create the database and the tables.
+8) create the login and signup pages.
+9) create the home page.
+10) create the admin page.
+11) create the people page.
+

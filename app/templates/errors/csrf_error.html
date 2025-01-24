@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Security Error</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger mb-4">
+                        <h5 class="alert-heading">CSRF Token Verification Failed</h5>
+                        <p>{{ reason }}</p>
+                    </div>
+                    <p>This error typically occurs when:</p>
+                    <ul>
+                        <li>The page has been open for too long (token expired)</li>
+                        <li>The form was submitted from an unauthorized source</li>
+                        <li>The browser's cookies were cleared during the session</li>
+                    </ul>
+                    <div class="mt-4">
+                        <p>Please try the following:</p>
+                        <ol>
+                            <li>Go back to the previous page and refresh it</li>
+                            <li>Try submitting the form again</li>
+                            <li>If the problem persists, please <a href="{{ url_for('main.index') }}">return to the homepage</a> and start over</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="javascript:history.back()" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Go Back
+                    </a>
+                    <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+                        <i class="fas fa-home"></i> Go to Homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

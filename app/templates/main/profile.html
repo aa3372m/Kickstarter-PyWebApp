@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-user-circle"></i> Profile Settings</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('main.profile') }}" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissible fade show">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        
+                        <!-- Profile Picture -->
+                        <div class="text-center mb-4">
+                            <img src="{{ url_for('static', filename='uploads/' + current_user.profile_picture) if current_user.profile_picture else url_for('static', filename='img/default-avatar.png') }}"
+                                 class="rounded-circle profile-picture mb-3" alt="Profile Picture"
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                            <div class="mb-3">
+                                <label for="profile_picture" class="form-label">Change Profile Picture</label>
+                                <input type="file" class="form-control" id="profile_picture" name="profile_picture"
+                                       accept="image/*">
+                                <div class="form-text">Maximum file size: 5MB. Supported formats: PNG, JPG, JPEG.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- User Information -->
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" value="{{ current_user.username }}"
+                                   readonly>
+                            <div class="form-text">Username cannot be changed.</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                   value="{{ current_user.email }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="full_name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="full_name" name="full_name"
+                                   value="{{ current_user.full_name }}" required>
+                        </div>
+                        
+                        <!-- User Preferences -->
+                        <h5 class="mb-3 mt-4">Preferences</h5>
+                        
+                        <div class="mb-3">
+                            <label for="theme" class="form-label">Theme</label>
+                            <select class="form-select" id="theme" name="theme">
+                                {% for theme in config['AVAILABLE_THEMES'] %}
+                                    <option value="{{ theme }}"
+                                            {% if current_user.preferences and current_user.preferences.theme == theme %}selected{% endif %}>
+                                        {{ theme|title }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="language" class="form-label">Language</label>
+                            <select class="form-select" id="language" name="language">
+                                <option value="en" {% if current_user.preferences and current_user.preferences.language == 'en' %}selected{% endif %}>English</option>
+                                <option value="es" {% if current_user.preferences and current_user.preferences.language == 'es' %}selected{% endif %}>Spanish</option>
+                                <option value="fr" {% if current_user.preferences and current_user.preferences.language == 'fr' %}selected{% endif %}>French</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notifications_enabled"
+                                       name="notifications_enabled"
+                                       {% if current_user.preferences and current_user.preferences.notifications_enabled %}checked{% endif %}>
+                                <label class="form-check-label" for="notifications_enabled">
+                                    Enable Notifications
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('main.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Dashboard
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Account Management -->
+            <div class="card mt-4">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="fas fa-shield-alt"></i> Account Management</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('auth.change_password') }}" class="btn btn-warning">
+                            <i class="fas fa-key"></i> Change Password
+                        </a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                            <i class="fas fa-trash-alt"></i> Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Delete Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Are you sure you want to delete your account? This action cannot be undone.</p>
+                <ul class="mt-3">
+                    <li>All your data will be permanently deleted</li>
+                    <li>You will lose access to all features</li>
+                    <li>Your username will be available for others to use</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form action="{{ url_for('main.delete_account') }}" method="POST" style="display: inline;">
+                    {{ form.csrf_token }}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Delete Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+.profile-picture {
+    border: 3px solid var(--bs-primary);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Preview profile picture before upload
+    const profilePicInput = document.getElementById('profile_picture');
+    const profilePicPreview = document.querySelector('.profile-picture');
+    
+    profilePicInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profilePicPreview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});
+</script>
+{% endblock %} 
